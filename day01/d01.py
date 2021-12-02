@@ -35,17 +35,17 @@ def get_triplet_sums(numbers:list) -> list:
     """Tries to create triplets from a list of ints
     and returns a list of their sums."""
 
-    triples = []
+    triplets = []
     index = 0
     while True:
         try:
             trip = (numbers[index], numbers[index+1], numbers[index+2])
             trip = sum(trip)
-            triples.append(trip)
+            triplets.append(trip)
             index += 1
         except IndexError:
             break
-    return triples
+    return triplets
 
 
 def main():
