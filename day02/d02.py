@@ -63,6 +63,7 @@ def part_02_movement(direction_tuples:list) -> int:
 
 def main():
     """The main function."""
+
     puzzle_input = get_puzzle_input()
     direction_tuples = convert_input_to_tuples(inpt_list=puzzle_input)
 
