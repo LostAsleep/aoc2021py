@@ -4,7 +4,7 @@
 INPT = "./input.txt"
 
 
-def get_puzzle_input(inpt_file=INPT) -> list:
+def get_puzzle_input(inpt_file=INPT) -> list[str]:
     """Read the input file and returns a list of lines (whitespace striped.)"""
 
     with open(file=inpt_file, mode="r") as f:
@@ -15,7 +15,7 @@ def get_puzzle_input(inpt_file=INPT) -> list:
         return inpt
 
 
-def generate_num_lists(inpt_nums_as_str:list):
+def generate_num_lists(inpt_nums_as_str:list[str]):
     """Create integer lists of the string input."""
 
     conv_inpt = []
@@ -25,7 +25,7 @@ def generate_num_lists(inpt_nums_as_str:list):
     return conv_inpt
 
 
-def count_max_min_binary(list_of_ints:list) -> str:
+def count_max_min_binary(list_of_ints:list[int]) -> str:
     """Return the the binary with the most and the least ones an zeros
     according to the problem description of part 1."""
 
@@ -53,7 +53,7 @@ def count_max_min_binary(list_of_ints:list) -> str:
     return max_chars, min_chars
 
 
-def get_positional_lists(list_of_ints:list) -> list:
+def get_positional_lists(list_of_ints:list[int]) -> list[int]:
     result_list = []
     for i in range(len(list_of_ints[0])):
         temp = []
