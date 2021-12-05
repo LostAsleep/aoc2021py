@@ -1,84 +1,80 @@
-"""Day 3 Part 1 solution."""
+from collections import Counter
 
 
-INPT = "./input.txt"
+def get_input(fname="./input.txt") -> list[str]:
+    with open(file=fname) as fhand:
+        input_data = [line.strip() for line in fhand.readlines()]
+    return input_data
 
 
-def get_puzzle_input(inpt_file=INPT) -> list[str]:
-    """Read the input file and returns a list of lines (whitespace striped.)"""
-
-    with open(file=inpt_file, mode="r") as f:
-        inpt = []
-        for line in f:
-            line = line.strip()
-            inpt.append(line)
-        return inpt
+def get_pos_list(data:list[str]) -> list[str]:
+    positional_list = []
+    for i in range(len(input_data[0])):
+        temp = [d[i] for d in input_data]
+        positional_list.append(temp)
+    return list(positional_list)
 
 
-def generate_num_lists(inpt_nums_as_str:list[str]):
-    """Create integer lists of the string input."""
-
-    conv_inpt = []
-    for line in inpt_nums_as_str:
-        l_list = [int(x) for x in list(line)]
-        conv_inpt.append(l_list)
-    return conv_inpt
-
-
-def count_max_min_binary(list_of_ints:list[int]) -> str:
-    """Return the the binary with the most and the least ones an zeros
-    according to the problem description of part 1."""
-
-    max_chars = []
-    min_chars = []
-    for char in range (len(list_of_ints[0])):
-        one = 0
-        zero = 0
-        
-        for list in list_of_ints:
-            if list[char] == 1:
-                one += 1
-            elif list[char] == 0:
-                zero += 1
-        
-        if one > zero:
-            max_chars.append(1)
-            min_chars.append(0)
-        elif one < zero:
-            max_chars.append(0)
-            min_chars.append(1)
+def part_01_solution(list_input):
+    pos_list = get_pos_list(list_input)
+    max_string = ""
+    min_string = ""
+    for chars in pos_list:
+        most_com = Counter(chars).most_common(2)
+        most = most_com[0][0]
+        least = most_com[1][0]
+        if most_com[0][1] != most_com[1][1]:
+            max_string += most
+            min_string += least
     
-    max_chars = "".join([str(x) for x in max_chars])
-    min_chars = "".join([str(x) for x in min_chars])
-    return max_chars, min_chars
+    print(f"Gamma Rate (Max): {max_string} = {int(max_string, base=2)}")
+    print(f"Epsilon Rate (Min): {min_string} = {int(min_string, base=2)}")
+    print(f"Power Consumption: {int(max_string, base=2) * int(min_string, base=2)}\n")
 
 
-def get_positional_lists(list_of_ints:list[int]) -> list[int]:
-    result_list = []
-    for i in range(len(list_of_ints[0])):
-        temp = []
-        for int_list in list_of_ints:
-            temp.append(int_list[i])
-        result_list.append(temp)
-    return result_list
+def part_02_solution(list_input):
+    possible_oxy = list(list_input)
+    possible_co2 = list(list_input)
 
+    for i in range(len(possible_oxy[0])):  # To get length of bit sequence
+        if len (possible_oxy) == 1:
+            break
+        pos_list = [b[i] for b in possible_oxy]
+        count = Counter(pos_list)
+        temp_list = []
+        zeros, ones = count["0"], count["1"]
+        for bits in possible_oxy:
+            if zeros > ones and bits[i] == "0":
+                temp_list.append(bits)
+            elif ones > zeros and bits[i] == "1":
+                temp_list.append(bits)
+            elif ones == zeros and bits[i] == "1":
+                temp_list.append(bits)
+        possible_oxy = list(temp_list)
 
-def oxy_status(input_list:list):
-    pass
+    for i in range(len(possible_co2[0])):  # To get length of bit sequence
+        if len(possible_co2) == 1:
+            break
+        pos_list = [b[i] for b in possible_co2]
+        count = Counter(pos_list)
+        temp_list = []
+        zeros, ones = count["0"], count["1"]
+        for bits in possible_co2:
+            if zeros < ones and bits[i] == "0":
+                temp_list.append(bits)
+            elif ones < zeros and bits[i] == "1":
+                temp_list.append(bits)
+            elif ones == zeros and bits[i] == "0":
+                temp_list.append(bits)
+        possible_co2 = list(temp_list)
 
-
-def main():
-    """The main function."""
-
-    puzzle_input = get_puzzle_input()
-    converted_input = generate_num_lists(puzzle_input)
-    # print(converted_input)
-    maximum, minimum = count_max_min_binary(converted_input)
-    product = int(maximum, base=2) * int(minimum, base=2)
-    print(product)
-    test_postitional_list = get_positional_lists(converted_input)
-    print(test_postitional_list)
+    print(f"Oxygen Generator: {possible_oxy[0]} = {int(possible_oxy[0], base=2)}")
+    print(f"CO2 Scrubber: {possible_co2[0]} = {int(possible_co2[0], base=2)}")
+    print(f"Life Support rating: {int(possible_oxy[0], base=2) * int(possible_co2[0], base=2)}\n")
 
 
 if __name__ == "__main__":
-    main()
+    input_data = get_input()
+    part_01_solution(input_data)
+    part_02_solution(input_data)
+
