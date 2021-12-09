@@ -1,4 +1,7 @@
-def get_input(fname="./input.txt") -> list[str]:
+INPT = "./input_d04.txt"
+
+
+def get_input(fname=INPT):
     with open(file=fname) as fhand:
         input_data = [line.strip() for line in fhand.readlines()]
     return input_data
@@ -6,7 +9,7 @@ def get_input(fname="./input.txt") -> list[str]:
 
 class BingoBoard:
 
-    def __init__(self, board_data: list[str]):
+    def __init__(self, board_data):
         self.board_data = list(board_data)
         self.board = dict()
         self.create_board()
@@ -20,7 +23,7 @@ class BingoBoard:
             for y in range(board_size):
                 self.board[(x, y)] = (self.board_data[x][y], False)
 
-    def update_drawn_number(self, num: str):
+    def update_drawn_number(self, num):
         if self.win is False:
             self.last_num = int(num)
             for pos in self.board.keys():
@@ -61,7 +64,7 @@ class BingoBoard:
             print("Sum of unmarked numbers x last num:", sum(unmarked_nums) * self.last_num)
 
 
-def parse_board_input(grid_inpt: list[str]) -> list[str]:
+def parse_board_input(grid_inpt):
     """Get rid of empty lines/lists and return a list containing
     the lists of the board rows."""
     data_of_boards = []
@@ -77,7 +80,7 @@ def parse_board_input(grid_inpt: list[str]) -> list[str]:
     return data_of_boards
 
 
-def create_bingo_boards(board_lists: list[str]):
+def create_bingo_boards(board_lists):
     """Loop through parsed bing board data and create bingo board objects."""
     all_bingo_boards = []
     for board_data in board_lists:
@@ -85,7 +88,7 @@ def create_bingo_boards(board_lists: list[str]):
     return all_bingo_boards
 
 
-def part_1_solution(parsed_board_data: list[str], numbers: list[str]):
+def part_1_solution(parsed_board_data, numbers):
     """Get first winning bingo board."""
     all_boards = create_bingo_boards(parsed_board_data)
     winner = False
@@ -101,7 +104,7 @@ def part_1_solution(parsed_board_data: list[str], numbers: list[str]):
                 winner = True
 
 
-def part_2_solution(parsed_board_data: list[str], numbers: list[str]):
+def part_2_solution(parsed_board_data, numbers):
     """Get last winning bingo board."""
     all_boards = create_bingo_boards(parsed_board_data)
     winning_boards = []

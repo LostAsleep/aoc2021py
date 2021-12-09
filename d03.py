@@ -1,13 +1,16 @@
 from collections import Counter
 
 
-def get_input(fname="./input.txt") -> list[str]:
+INPT = "./input_d03.txt"
+
+
+def get_input(fname=INPT):
     with open(file=fname) as fhand:
         input_data = [line.strip() for line in fhand.readlines()]
     return input_data
 
 
-def get_pos_list(data:list[str]) -> list[str]:
+def get_pos_list(data):
     positional_list = []
     for i in range(len(input_data[0])):
         temp = [d[i] for d in input_data]
@@ -77,4 +80,3 @@ if __name__ == "__main__":
     input_data = get_input()
     part_01_solution(input_data)
     part_02_solution(input_data)
-

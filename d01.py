@@ -1,10 +1,10 @@
 """Day 01 Part 1 and 2."""
 
 
-INPT = "./input.txt"
+INPT = "./d01_input.txt"
 
 
-def get_puzzle_input() -> list:
+def get_puzzle_input():
     """Read the input file and returns a list of lines (whitespace striped.)"""
 
     with open(file=INPT, mode="r") as f:
@@ -15,7 +15,7 @@ def get_puzzle_input() -> list:
         return inpt
 
 
-def count_increases(numbers:list) -> int:
+def count_increases(numbers):
     """Count the number of increases while iterating through a list of ints.
     Returns the number of increases."""
 
@@ -31,7 +31,7 @@ def count_increases(numbers:list) -> int:
     return num_inc
 
 
-def get_triplet_sums(numbers:list) -> list:
+def get_triplet_sums(numbers):
     """Tries to create triplets from a list of ints
     and returns a list of their sums."""
 

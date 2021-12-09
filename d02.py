@@ -1,10 +1,10 @@
 """Day 2 Part 1 and 2 solution."""
 
 
-INPT = "./input.txt"
+INPT = "./input_d02.txt"
 
 
-def get_puzzle_input(inpt_file=INPT) -> list:
+def get_puzzle_input(inpt_file=INPT):
     """Read the input file and returns a list of lines (whitespace striped.)"""
 
     with open(file=inpt_file, mode="r") as f:
@@ -15,7 +15,7 @@ def get_puzzle_input(inpt_file=INPT) -> list:
         return inpt
 
 
-def convert_input_to_tuples(inpt_list:list) -> list:
+def convert_input_to_tuples(inpt_list):
     """Expects a list of strings with a direction and a number
     separated by a space."""
 
@@ -28,7 +28,7 @@ def convert_input_to_tuples(inpt_list:list) -> list:
     return tuples
 
 
-def part_01_movement(direction_tuples:list) -> int:
+def part_01_movement(direction_tuples):
     """Move along the instruction according to part 1 instuctions."""
 
     horizontal_position = 0
@@ -44,7 +44,7 @@ def part_01_movement(direction_tuples:list) -> int:
     return horizontal_position * depth
 
 
-def part_02_movement(direction_tuples:list) -> int:
+def part_02_movement(direction_tuples):
     """Move along the instruction according to part 2 instuctions."""
 
     horizontal_position = 0
@@ -76,4 +76,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
